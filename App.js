@@ -4,42 +4,34 @@ import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
 
-  const [guess, setGuess] = useState(0);
-  const [text, setText] = useState("");
-  const [count, setCount] = useState(0);
-  const [num, setNum] = useState(0);
-
-  const getRandomNum = () => {
-    setNum(Math.floor(Math.random() * 100) + 1);
-    console.log(num);
-  }
+  const [guess, setGuess] = React.useState(0);
+  const [text, setText] = React.useState('');
+  const [count, setCount] = React.useState(0);
+  const [num, setNum] = React.useState(Math.floor(Math.random() * 100) + 1);
 
   const buttonPressed = () => {
     setCount(count + 1)
 
     if (guess > num) {
-      console.log("The guess was too high") 
-      setText=("Your guess " + guess + "was too low");
-    } 
-    if (guess < num) {
-      console.log("The guess was too low") 
-      setText=("Your guess " + guess + "was too low");
-    } 
-    if (guess == num) {
-      Alert.alert("You guessed the number in " + count + " guesses");
-    }
+      setText("Your guess " + guess + " was too low");
 
-  };
+    } else if (guess < num) {
+      setText("Your guess " + guess + " was too low");
+
+    } else if (guess == num) {
+      Alert.alert("You guessed the number in " + count + " guesses");
+
+    } else {
+      Alert.alert("Something went wrong");
+    }
+  }
 
 
   return (
     <View style={styles.container}>
-      <Button
-        onPress={getRandomNum}
-        title="Generate the number"
-      />
-      <Text value={text}>
-        {'\n'}Guess the random number between 1-100!{'\n'} 
+      <Text>
+        Guess the random number between 1-100!{'\n'} 
+        {'\n'}
         {text}
       </Text>
       <TextInput
